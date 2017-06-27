@@ -2,6 +2,8 @@
  * Created by Gabriel.Tabus on 6/27/2017.
  */
 
+var euroConversion = false;
+
 var employeesList = [
     {
         firstName: 'John',
@@ -41,16 +43,44 @@ function salaryTotal()
     container.innerHTML = t;
 }
 function showList() {
-    var myTable = '<table border="1" class = "table-bordered">' +
-        '<tr><th>First Name</th>' +
-        '<th>Last Name</th>' +
-        '<th>Phone</th>' +
-        '<th>Salary</th></tr>';
-    for(var i in employeesList) {
-        myTable +=  '<tr><td>'+employeesList[i].firstName+
-                    '</td><td>'+employeesList[i].lastName+
-                    '</td><td>'+employeesList[i].phone+
-                    '</td><td>'+employeesList[i].salary+'</td></tr>';
+    var myTable;
+    if(!euroConversion) {
+        myTable = '<table border="1" class = "table table-bordered">' +
+            '<tr><th>First Name</th>' +
+            '<th>Last Name</th>' +
+            '<th>Phone</th>' +
+            '<th>Salary</th>' +
+            '<th>Vizualizare</th>' +
+            '<th>Stergere</th></tr>';
+        for (var i in employeesList) {
+            myTable += '<tr><td>' + employeesList[i].firstName +
+                '</td><td>' + employeesList[i].lastName +
+                '</td><td>' + employeesList[i].phone +
+                '</td><td>' + employeesList[i].salary +
+                '</td><td>' + '<button onclick="displayAlert(' + i + ')">Vizualizare</button>' +
+                '</td><td>' + '<button onclick="removeElemFromList(' + i + ')">Stergere</button>' + '</td></tr>';
+        }
+    }
+    else {
+        myTable = '<table border="1" class = "table table-bordered">' +
+            '<tr>' +
+            '<th>First Name</th>' +
+            '<th>Last Name</th>' +
+            '<th>Phone</th>' +
+            '<th>Salary</th>' +
+            '<th>euroValue</th>' +
+            '<th>Vizualizare</th>' +
+            '<th>Stergere</th>' +
+            '</tr>';
+        for (var i in employeesList) {
+            myTable += '<tr><td>' + employeesList[i].firstName +
+                '</td><td>' + employeesList[i].lastName +
+                '</td><td>' + employeesList[i].phone +
+                '</td><td>' + employeesList[i].salary +
+                '</td><td>' + employeesList[i].salary/4.5 +
+                '</td><td>' + '<button onclick="displayAlert(' + i + ')">Vizualizare</button>' +
+                '</td><td>' + '<button onclick="removeElemFromList(' + i + ')">Stergere</button>' + '</td></tr>';
+        }
     }
 
     myTable += '</table>';
@@ -77,8 +107,29 @@ function addEmployee()
     showList();
 }
 
+function removeElemFromList(index)
+{
+    employeesList.splice(index,1);
+    showList();
+}
+
 function removeLastEmployee()
 {
     employeesList.pop();
     showList();
+}
+
+function checkEuroConversion()
+{
+    if(!euroConversion)
+        euroConversion = true;
+    showList();
+}
+
+function displayAlert(index) {
+
+    alert("Employee: " + employeesList[index].firstName + " " +
+                        employeesList[index].lastName + " " +
+                        employeesList[index].phone + " " +
+                        employeesList[index].salary + ".");
 }
