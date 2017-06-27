@@ -8,4 +8,11 @@ var facts = [
 "Chuck Norris can hear sign language."
 ];
 
-
+function showImage()
+{
+    var myTable='<button id="show-funny-message" style="display:none;">'+
+    "<img src="resources/chuck.jpg" alt="Chuck" style="width:304px;height:228px;">"+
+    '</button>';
+    var container = document.getElementById('C');
+    container.innerHTML = myTable;
+}
