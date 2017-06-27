@@ -31,10 +31,12 @@ var employeesList = [
 function salaryTotal()
 {
     var t = '<p>';
+    var aux = 0;
     for(var i in employeesList)
     {
-        t=t+employeesList[i].salary;
+        aux = aux+employeesList[i].salary;
     }
+    t += aux + '</p>';
     var container = document.getElementById('totalcontainer');
     container.innerHTML = t;
 }
@@ -72,5 +74,11 @@ function addEmployee()
     var phone = document.getElementById("phone").value;
     var salary = document.getElementById("salary").value;
     employeesList.push(new Employee(firstName, lastName, phone, salary));
+    showList();
+}
+
+function removeLastEmployee()
+{
+    employeesList.pop();
     showList();
 }
